@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Google Search</title>
+      <style>
+                * {
+                              margin: 0;
+                              padding: 0;
+                              box-sizing: border-box;
+                }
+
+                body {
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              min-height: 100vh;
+                              background-color: #ffffff;
+                              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                }
+
+                .search-container {
+                              width: 100%;
+                              max-width: 560px;
+                              padding: 20px;
+                }
+
+                .search-box {
+                              display: flex;
+                              align-items: center;
+                              background-color: #ffffff;
+                              border: 1px solid #dfe1e5;
+                              border-radius: 24px;
+                              padding: 10px 16px;
+                              box-shadow: 0 1px 6px rgba(32, 33, 36, 0.08);
+                              transition: box-shadow 0.2s ease, border-color 0.2s ease;
+                }
+
+                .search-box:hover {
+                              box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+                              border-color: rgba(223, 225, 229, 0.7);
+                }
+
+                .search-box:focus-within {
+                              box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+                              border-color: rgba(223, 225, 229, 0.7);
+                }
+
+                .search-icon {
+                              flex-shrink: 0;
+                              width: 20px;
+                              height: 20px;
+                              margin-right: 12px;
+                              color: #9aa0a6;
+                }
+
+                .search-input {
+                              flex: 1;
+                              border: none;
+                              outline: none;
+                              font-size: 16px;
+                              color: #202124;
+                              background: transparent;
+                              line-height: 1.5;
+                }
+
+                .search-input::placeholder {
+                              color: #9aa0a6;
+                }
+
+                .clear-btn {
+                              flex-shrink: 0;
+                              display: none;
+                              align-items: center;
+                              justify-content: center;
+                              width: 20px;
+                              height: 20px;
+                              margin-left: 12px;
+                              border: none;
+                              background: none;
+                              cursor: pointer;
+                              color: #70757a;
+                              padding: 0;
+                }
+
+                .clear-btn.visible {
+                              display: flex;
+                }
+
+                .clear-btn:hover {
+                              color: #202124;
+                }
+
+                .search-buttons {
+                              display: flex;
+                              gap: 12px;
+                              margin-top: 20px;
+                              justify-content: center;
+                }
+
+                .search-btn {
+                              padding: 10px 24px;
+                              background-color: #f8f9fa;
+                              border: 1px solid #f8f9fa;
+                              border-radius: 4px;
+                              color: #3c4043;
+                              font-size: 14px;
+                              cursor: pointer;
+                              transition: background-color 0.1s ease, border-color 0.1s ease;
+                }
+
+                .search-btn:hover {
+                              background-color: #f8f9fa;
+                              border-color: #dadce0;
+                              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+  </head>
+  <body>
+        <div class="search-container">
+                  <form class="search-box" id="searchForm" action="https://www.google.com/search" method="GET" target="_blank">
+                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                  <circle cx="11" cy="11" r="8"></circle>circle>
+                                                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>line>
+                                </svg>svg>
+                                <input 
+                                                  type="text" 
+                                                  class="search-input" 
+                                                  id="searchInput" 
+                                                  name="q" 
+                                                  placeholder="Search Google" 
+                                                  autocomplete="off"
+                                                  spellcheck="false"
+                                              >
+                                <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear search">
+                                                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                        <line x1="18" y1="6" x2="6" y2="18"></line>line>
+                                                                        <line x1="6" y1="6" x2="18" y2="18"></line>line>
+                                                  </svg>svg>
+                                </button>button>
+                  </form>form>
+
+                  <div class="search-buttons">
+                                <button type="submit" form="searchForm" class="search-btn">Google Search</button>button>
+                                <button type="button" class="search-btn" onclick="document.getElementById('searchInput').focus();">I'm Feeling Lucky</button>button>
+                  </div>div>
+        </div>div>
+
+        <script>
+                  const searchInput = document.getElementById('searchInput');
+                  const clearBtn = document.getElementById('clearBtn');
+
+                  searchInput.addEventListener('input', () => {
+                                clearBtn.classList.toggle('visible', searchInput.value.length > 0);
+                  });
+
+                  clearBtn.addEventListener('click', () => {
+                                searchInput.value = '';
+                                clearBtn.classList.remove('visible');
+                                searchInput.focus();
+                  });
+
+                  searchInput.focus();
+        </script>
+  </body>
+</html>html>
+        </script>
+  </body>
+      </style></title>
+  </head>
