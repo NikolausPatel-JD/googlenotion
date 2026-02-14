@@ -1,191 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Google Search Widget</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>NikSearch</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    }
+      body {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         min-height: 100vh;
+         background: transparent;
+         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
 
-    .search-container {
-      width: 100%;
-      max-width: 560px;
-      padding: 16px 20px;
-    }
+      .header {
+         width: 100%;
+         background: white;
+         padding: 16px 0;
+         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+         margin-bottom: 20px;
+         text-align: center;
+      }
 
-    .search-box {
-      display: flex;
-      align-items: center;
-      background: #ffffff;
-      border: 1px solid #dfe1e5;
-      border-radius: 24px;
-      padding: 8px 16px;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
-    }
+      .header-title {
+         font-size: 48px;
+         font-weight: 400;
+         letter-spacing: -1px;
+      }
 
-    .search-box:hover {
-      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.18);
-      border-color: rgba(223, 225, 229, 0);
-    }
+      .header-title span:nth-child(1) {
+         color: #4285F4;
+      }
 
-    .search-box:focus-within {
-      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.24);
-      border-color: rgba(223, 225, 229, 0);
-    }
+      .header-title span:nth-child(2) {
+         color: #EA4335;
+      }
 
-    .search-icon {
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      margin-right: 12px;
-      color: #9aa0a6;
-    }
+      .header-title span:nth-child(3) {
+         color: #FBBC04;
+      }
 
-    .search-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      color: #202124;
-      background: transparent;
-      line-height: 1.5;
-    }
+      .header-title span:nth-child(4) {
+         color: #4285F4;
+      }
 
-    .search-input::placeholder {
-      color: #9aa0a6;
-    }
+      .header-title span:nth-child(5) {
+         color: #34A853;
+      }
 
-    .clear-btn {
-      flex-shrink: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      margin-left: 8px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      color: #70757a;
-      border-radius: 50%;
-      transition: background 0.15s ease;
-    }
+      .header-title span:nth-child(6) {
+         color: #EA4335;
+      }
 
-    .clear-btn:hover {
-      background: #f1f3f4;
-    }
+      .search-container {
+         width: 100%;
+         max-width: 560px;
+         padding: 16px 20px;
+      }
 
-    .clear-btn.visible {
-      display: flex;
-    }
+      .search-box {
+         display: flex;
+         align-items: center;
+         background: #ffffff;
+         border: 1px solid #dfe1e5;
+         border-radius: 24px;
+         padding: 8px 16px;
+         transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
 
-    .shortcuts {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-      padding: 0 4px;
-      flex-wrap: wrap;
-    }
+      .search-box:hover {
+         box-shadow: 0 1px 6px rgba(32, 33, 36, 0.18);
+         border-color: rgba(223, 225, 229, 0);
+      }
 
-    .shortcut-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: #f1f3f4;
-      border: none;
-      border-radius: 16px;
-      font-size: 12px;
-      color: #3c4043;
-      cursor: pointer;
-      transition: background 0.15s ease;
-      text-decoration: none;
-    }
+      .search-box:focus-within {
+         box-shadow: 0 1px 6px rgba(32, 33, 36, 0.24);
+         border-color: rgba(223, 225, 229, 0);
+      }
 
-    .shortcut-chip:hover {
-      background: #e8eaed;
-    }
+      .search-icon {
+         flex-shrink: 0;
+         width: 20px;
+         height: 20px;
+         margin-right: 12px;
+         color: #9aa0a6;
+      }
 
-    .shortcut-chip svg {
-      width: 14px;
-      height: 14px;
-      color: #70757a;
-    }
-  </style>
-</head>
-<body>
-  <div class="search-container">
+      .search-input {
+         flex: 1;
+         border: none;
+         outline: none;
+         font-size: 15px;
+         color: #202124;
+         background: transparent;
+         line-height: 1.5;
+      }
+
+      .search-input::placeholder {
+         color: #9aa0a6;
+      }
+
+      .clear-btn {
+         flex-shrink: 0;
+         display: none;
+         align-items: center;
+         justify-content: center;
+         width: 24px;
+         height: 24px;
+         margin-left: 8px;
+         border: none;
+         background: none;
+         cursor: pointer;
+         color: #70757a;
+         border-radius: 50%;
+         transition: background 0.15s ease;
+      }
+
+      .clear-btn:hover {
+         background: #f1f3f4;
+      }
+
+      .clear-btn.visible {
+         display: flex;
+      }
+
+      .shortcuts {
+         display: flex;
+         gap: 8px;
+         margin-top: 12px;
+         padding: 0 4px;
+         flex-wrap: wrap;
+      }
+
+      .shortcut-chip {
+         display: inline-flex;
+         align-items: center;
+         gap: 6px;
+         padding: 6px 12px;
+         background: #f1f3f4;
+         border: none;
+         border-radius: 16px;
+         font-size: 12px;
+         color: #3c4043;
+         cursor: pointer;
+         transition: background 0.15s ease;
+         text-decoration: none;
+      }
+
+      .shortcut-chip:hover {
+         background: #e8eaed;
+      }
+
+      .shortcut-chip svg {
+         width: 14px;
+         height: 14px;
+         color: #70757a;
+      }
+      </style>
+  </head>
+  <body>
+     <div class="header">
+        <h1 class="header-title">
+           <span>N</span><span>i</span><span>k</span><span>S</span><span>e</span><span>a</span><span>r</span><span>c</span><span>h</span>
+        </h1>h1>
+     </div>div>
+  
+   <div class="search-container">
     <form class="search-box" id="searchForm" action="https://www.google.com/search" method="GET" target="_blank">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input
-        class="search-input"
-        type="text"
-        name="q"
-        placeholder="Search Google"
-        autocomplete="off"
-        spellcheck="false"
-        id="searchInput"
-      />
-      <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear search">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </form>
-
+     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>line>
+     </svg>svg>
+     <input class="search-input" type="text" name="q" placeholder="Search Google" autocomplete="off" spellcheck="false" id="searchInput" />
+     <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <line x1="18" y1="6" x2="6" y2="18"></line>line>
+       <line x1="6" y1="6" x2="18" y2="18"></line>line>
+      </svg>svg>
+     </button>button>
+    </form>form>
+   
     <div class="shortcuts">
-      <a class="shortcut-chip" href="https://mail.google.com" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
-        Gmail
-      </a>
-      <a class="shortcut-chip" href="https://www.youtube.com" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21 5,3"/></svg>
-        YouTube
-      </a>
-      <a class="shortcut-chip" href="https://drive.google.com" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-        Drive
-      </a>
-      <a class="shortcut-chip" href="https://maps.google.com" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Maps
-      </a>
-    </div>
-  </div>
+     <a class="shortcut-chip" href="https://mail.google.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>svg>
+      Gmail
+     </a>a>
+     <a class="shortcut-chip" href="https://www.youtube.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21 5,3"/></svg>svg>
+      YouTube
+     </a>a>
+     <a class="shortcut-chip" href="https://drive.google.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>svg>
+      Drive
+     </a>a>
+     <a class="shortcut-chip" href="https://maps.google.com" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>svg>
+      Maps
+     </a>a>
+    </div>div>
+   </div>div>
+  
+   <script>
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearBtn');
 
-  <script>
-    const input = document.getElementById('searchInput');
-    const clearBtn = document.getElementById('clearBtn');
+      input.addEventListener('input', () => {
+         clearBtn.classList.toggle('visible', input.value.length > 0);
+      });
 
-    input.addEventListener('input', () => {
-      clearBtn.classList.toggle('visible', input.value.length > 0);
-    });
+      clearBtn.addEventListener('click', () => {
+         input.value = '';
+         clearBtn.classList.remove('visible');
+         input.focus();
+      });
 
-    clearBtn.addEventListener('click', () => {
-      input.value = '';
-      clearBtn.classList.remove('visible');
+      // Auto-focus the input
       input.focus();
-    });
-
-    // Auto-focus the input
-    input.focus();
-  </script>
-</body>
-</html>
+   </script>
+  </body>
+</html>html>
+   </script></span></span>
+  </body>
+   </style></title>
+  </head>
